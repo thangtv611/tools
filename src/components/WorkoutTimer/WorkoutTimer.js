@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Countdown.css"; // Import the CSS file
 
 const CountdownTimer = () => {
-  const workoutTime = 20; // Workout duration in seconds
-  const restTime = 10; // Rest duration in seconds
-  const totalTime = 10 * 60; // Total workout session time in seconds
-
+  const [workoutTime, setWorkoutTime] = useState(20);
+  const [restTime, setRestTime] = useState(10);
+  const [totalTime, setTotalTime] = useState(10 * 60);
   const [timeLeft, setTimeLeft] = useState(workoutTime);
   const [isWorkout, setIsWorkout] = useState(true);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -13,7 +12,7 @@ const CountdownTimer = () => {
   const [totalTimeLeft, setTotalTimeLeft] = useState(totalTime);
 
   useEffect(() => {
-    if (!running || elapsedTime >= totalTime) return;
+    if (!running || elapsedTime >= totalTimeLeft) return;
 
     const timer = setInterval(() => {
       if (timeLeft > 0) {
@@ -34,6 +33,14 @@ const CountdownTimer = () => {
     setRunning((prev) => !prev);
   };
 
+  const resetTimer = () => {
+    setRunning(false);
+    setElapsedTime(0);
+    setTimeLeft(workoutTime);
+    setTotalTimeLeft(totalTime);
+    setIsWorkout(true);
+  };
+
   const formatTime = (seconds) => {
     const min = Math.floor(seconds / 60);
     const sec = seconds % 60;
@@ -42,17 +49,51 @@ const CountdownTimer = () => {
 
   return (
     <div className="countdown-container">
-      <h1>Workout timer</h1>
+      <div className="input-group">
+        <div className="controls">
+          <div>
+            <label>Workout Time (s): </label>
+            <input
+              type="number"
+              value={workoutTime}
+              onChange={(e) => setWorkoutTime(Number(e.target.value))}
+            />
+          </div>
+          <div>
+            <label>Rest Time (s): </label>
+            <input
+              type="number"
+              value={restTime}
+              onChange={(e) => setRestTime(Number(e.target.value))}
+            />
+          </div>
+          <div>
+            <label>Total Time (min): </label>
+            <input
+              type="number"
+              value={totalTime / 60}
+              onChange={(e) => setTotalTime(Number(e.target.value) * 60)}
+            />
+          </div>
+        </div>
+      </div>
       <div className={`circle ${isWorkout ? "workout" : "rest"}`}>
         {timeLeft}s
       </div>
       <div className="status">
         {isWorkout ? "Workout Time 💪" : "Rest Time 😴"}
       </div>
-      <div className="total-time">Total Time Left: {formatTime(totalTimeLeft)}</div>
-      <button className="start-button" onClick={toggleTimer}>
-        {running ? "Pause" : "Start"}
-      </button>
+      <div className="total-time">
+        Total Time Left: {formatTime(totalTimeLeft)}
+      </div>
+      <div className="controls">
+        <button className="start-button" onClick={toggleTimer}>
+          {running ? "Pause" : "Start"}
+        </button>
+        <button className="reset-button" onClick={resetTimer}>
+          Reset
+        </button>
+      </div>
     </div>
   );
 };
