@@ -7,6 +7,7 @@ import {
   InfoCircleOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 const { Content, Footer, Sider } = Layout;
 const { Title } = Typography;
 
@@ -52,7 +53,10 @@ const LayoutComponent = ({ children }) => {
       </Sider>
 
       <Layout style={{ marginLeft: 200 }}>
-        <Content style={{ marginLeft: 50 }}>{children}</Content>
+        <Content style={{ marginLeft: 50 }}>
+          {children}
+          <SpeedInsights />
+        </Content>
         <Footer style={{ textAlign: "center" }}>
           CopyRight ©2021 Created by Aaron
         </Footer>
