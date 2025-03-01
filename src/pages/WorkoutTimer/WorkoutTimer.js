@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./Countdown.css"; // Import the CSS file
+import "./WorkoutTimer.css"; // Import the CSS file
 
-const CountdownTimer = () => {
+const WorkoutTimer = () => {
   const [workoutTime, setWorkoutTime] = useState(20);
   const [restTime, setRestTime] = useState(10);
   const [totalTime, setTotalTime] = useState(10 * 60);
@@ -50,6 +50,7 @@ const CountdownTimer = () => {
   return (
     <div className="countdown-container">
       <div className="input-group">
+        <h1>Workout timer tool</h1>
         <div className="controls">
           <div>
             <label>Workout Time (s): </label>
@@ -98,4 +99,4 @@ const CountdownTimer = () => {
   );
 };
 
-export default CountdownTimer;
+export default WorkoutTimer;
