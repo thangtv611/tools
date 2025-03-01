@@ -68,7 +68,8 @@
   gap: 10px;
 }
 
-.start-button, .reset-button {
+.start-button,
+.reset-button {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
@@ -98,4 +99,11 @@
 .controls {
   display: flex;
   gap: 10px;
+}
+
+.vertical-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
 }

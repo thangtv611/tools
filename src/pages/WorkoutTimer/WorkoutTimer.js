@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./WorkoutTimer.css"; // Import the CSS file
+import { Button } from "antd";
+import { CloseCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
 
 const WorkoutTimer = () => {
   const [workoutTime, setWorkoutTime] = useState(20);
@@ -51,7 +53,7 @@ const WorkoutTimer = () => {
     <div className="countdown-container">
       <div className="input-group">
         <h1>Workout timer tool</h1>
-        <div className="controls">
+        <div className="vertical-controls">
           <div>
             <label>Workout Time (s): </label>
             <input
@@ -88,12 +90,22 @@ const WorkoutTimer = () => {
         Total Time Left: {formatTime(totalTimeLeft)}
       </div>
       <div className="controls">
-        <button className="start-button" onClick={toggleTimer}>
+        <Button
+          icon={<RightCircleOutlined />}
+          variant="solid"
+          color="blue"
+          onClick={toggleTimer}
+        >
           {running ? "Pause" : "Start"}
-        </button>
-        <button className="reset-button" onClick={resetTimer}>
+        </Button>
+        <Button
+          icon={<CloseCircleOutlined />}
+          iconPosition="start"
+          danger
+          onClick={resetTimer}
+        >
           Reset
-        </button>
+        </Button>
       </div>
     </div>
   );
